@@ -6,10 +6,10 @@
 - System
 - Application
 
-### 사실 System이나 Application이나 Software지만 굳이 둘을 나눌 수 있는 이유는 뭘까?
+### System이나 Application이나 둘 다 Software지만 나눌 수 있는 이유는 뭘까?
 
 - Military, Government Uses => General(일반적인) Purpose로 전환
-- 각각의 기능을 하던 컴퓨터들에서 공통적으로 하드웨어를 제어하는 기능을 묶으면서 System이 구성된 배경이라 볼 수 있다.
+- 각각의 기능을 하던 컴퓨터들에서 공통적으로 하드웨어를 제어하는 기능을 묶으면서 System이 구성된다.
 
 ### Application vs System vs Hardware
 
@@ -18,10 +18,10 @@
 
 ### System이 필요한 이유?
 
-- `Hello World`를 한 줄로 짤 수 있는 이유가 아닐까?
+- `Hello World`를 한 줄로 짤 수 있는 이유
 - Application Level에 사용편의성과 효율성을 제공
 - Hardware Level을 보호(각각의 Application이 Hardware에 직접적인 영향을 미치지 않도록)
-- 사실, JVM, Tomcat도 결국 Application
+- JVM, Tomcat도 결국 Application Level
 
 <br/>
 
@@ -61,7 +61,7 @@ Central Processing Unit(CPU)
 
 - Fetch => Decode => Execution
 - Fetch instruction from the address of memory written in PC.(Automatically)
-- Decode and execute th instruction
+- Decode and execute the instruction
 - Update the value written in PC to point next address(Automatically)
 
 ### I/O => Storage - Secondary Storage
@@ -88,7 +88,7 @@ Small but Fast => Huge but Slow
 
 #### Tertiary
 
-- Exteral Storage
+- External Storage
 
 ### Processor와 I/O
 
