@@ -122,3 +122,128 @@ Small but Fast => Huge but Slow
 - DMA도 I/O기 떄문에 Interrupt가 발생한다.
 - 유일하게 메모리에 직접 접근 가능한 아이
 - 위의 2~3의 과정에서 overhead가 일어날 수 있는데 DMA를 통해 CPU에게 매번 가던 Interrupt를 DMA에서 수행한다.
+
+<br/>
+
+## Single-Processor System
+
+- Core : Execute instruction and stroe data locally
+- With other components to support the core
+- Processor became bottleneck
+
+## Multi-Processor System
+
+- Multiple processors with single core for each
+- AMP(Asymmetric Multi Processing)
+  - 각각의 프로세서는 다른 역할
+- SMP(Symmetric Multi Processing)
+  - 각각의 프로세서가 모든 역할을 분산
+  - 일반적으로 SMP방식을 채택
+- To increase throughput N times
+- However, the throughput actually is "<=N" times
+
+## Multi-Core System
+
+- Multiple cores within single processor
+- Fast communication and low power consumption(멀티 프로세서 시스템은 시스템 버스를 통해 통신하지만 멀티 코어 시스템은 내부적으로 일어나기 때문에 상대적으로 성능이 더 좋다)
+- Still have some problem, but currently standard
+
+## NUMA(Non-Uniform Memory Access)
+
+- Multiple processors with local memory for each (프로세서별로 메모리가 다 따로 존재)
+- 코어는 여러 개지만 메모리는 하나다보니 모든 코어에서 하나의 메모리에 접근하게 된다. 그러다보니 시스템 버스에 병목현상이 일어난다.
+- Latency on remote access <= This is hot
+- Memory간의 동시성 처리는 Core 간의 통신으로 해결
+- 물리적으로 Memory가 여러 개
+
+## Clustered System
+
+- Multiple Computers with single storage
+- Asymmetric Clustering
+  - 하나의 컴퓨터가 죽는다면 모니터링만 하던 컴퓨터가 그 역할을 수행
+- Symmetric Clustering
+  - 모든 컴퓨터가 모니터링을 진행하고 가장 여유 있는 컴퓨터가 죽은 컴퓨터의 역할을 수행
+- High availability service
+- Need to reprogram application for parallelization
+
+## Today's Computer System
+
+- Personal Computing
+- Embedded mobile computing
+- Client-server computing
+- Peer to peer computing
+- Cloud Computing
+- Real-time embedded computing
+
+<br/>
+
+## System
+
+### Life of Operating System (Boot Sequence)
+
+- 최소 1개의 메모리와 1개의 Core
+- Boot Loader를 통해 Memory에 OS가 올라감
+
+1. Initialize primary CPU and other components in processor
+2. Set up system components to operates computer
+3. Wake secondary CPUs and initialize devices (ex. DMA 초기화)
+4. Execute system programs(daemon) and become idle
+5. OS Waiting for any events to occur
+
+### Execution of Application Software
+
+1. Program initially is stored in storage device
+2. Load progream into main memory
+3. Execute code of program line by line
+
+### Process
+
+1. Active instance of program in execution
+2. Use computer resources to perform its tasks
+3. What if process becomes idle?
+
+### Multiprogramming
+
+- 하나의 프로세스가 놀고 있는 동안에는 다른 프로세스를 실행
+- Keep users stisfied and reduce CPU idle time
+- Need techniques for resources to be shared
+
+### Multitasking
+
+- 여러 개의 프로세스를 놀고 동작하고를 반복
+- 시분할 운영체제
+- Switch processes periodically and frequently
+- Provide faster response time to users
+- Use timer to maintain control over CPUs
+  - timer
+    - Use clock signal and tick counter to get percise time
+    - Periodic - Generate interrupts on every N times
+    - One shot - Generate interrupts after N ticks
+
+### Multimode Operation
+
+- Hardware support for various execution modes
+- At least two level - Kernel mode & user mode
+- Limit every hardware access and some instructions
+- mode bit를 통해 User Mode와 Kernel Mode를 따로 관리
+
+### Scenario of Multimode Operation
+
+- OS booting scene: Kernel Mode
+- After booting: User Mode
+- Any events given to Kernel: Kernel Mode
+- User Mode => Kernel Mode로 오는 경우를 Exception(Trap)
+  - Unauthorized hardware access from application
+  - Interrupts raised by any hardware devices
+  - Service requests from application to kernel
+  - 결국 System Call(Software Interrupt, SWI)도 Exception을 통해서 일어나는 것
+- Kernal Mode와 User Mode가 서로 넘어갈 때 Context Switching이 일어난다.
+
+### Today's Operating System(POSIX Standard를 통해 개발)
+
+- Multics(1964 / MIT, AT&T, GE)
+- UNIX(1969 / Dennis Ritchie) - With C Language
+- BSD(1977 / CSRG @ UC Berkeley)
+- LINUX(1991 / Linus Trovalds) - And ... Git in 2005
+- Darwin(2000 / Apple)
+- Windows NT(1993 / Microsoft)
