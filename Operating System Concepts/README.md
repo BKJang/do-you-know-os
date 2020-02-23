@@ -3,7 +3,7 @@
 ## Computer System은 세 가지 계층으로 나눌 수 있다.
 
 - Hardware
-- System
+- System(Operating System) => 하나의 Harware에서 여러 애플리케이션이 돌 수 있도록 해주는 역할 (Ease of use to Applications)
 - Application
 
 ### System이나 Application이나 둘 다 Software지만 나눌 수 있는 이유는 뭘까?
@@ -20,7 +20,7 @@
 
 - `Hello World`를 한 줄로 짤 수 있는 이유
 - Application Level에 사용편의성과 효율성을 제공
-- Hardware Level을 보호(각각의 Application이 Hardware에 직접적인 영향을 미치지 않도록)
+- Hardware Level을 보호(각각의 Application이 Hardware에 직접적인 영향을 미치지 않도록) - Protection
 - JVM, Tomcat도 결국 Application Level
 
 <br/>
@@ -29,24 +29,36 @@
 
 - Turing Machine의 Head는 CPU, 띠는 RAM.
 - 요즘 컴퓨터는 대부분 `튜링 완전하다`.
+- System Bus
+  - Processor와 I/O와 Main memory간의 정보를 전달하기 위한 규약
 
 ### Processor
 
-Central Processing Unit(CPU)
+- Central Processing Unit(CPU)
+- Store data in a set of registers
+  - R0-N
+  - PC(Program Counter): 소스코드가 어디를 실행하고 있는지를 가리킴
+  - SP(Stack Pointer): 스택을 가리킴
+  - LR(Link Register)
 
 #### ControlUnit: Head를 움직이는 역할
+
+- Store data in a set of registers (Control Unit) => 하드웨어를 컨트롤하는 역할
+  - 예를 들어, 모니터를 키기 위해 모니터에 '켜줘!'라는 명령을 전달하는 것
+
 #### ALU: Turing Machine의 Head가 어디로 움질일지를 계산해주는 역할
 
 - Arithmetic logic circuit (ALU)
-- Store data in a set of registers (Control Unit)
+  - 예를 들어, `int a = 2;`에서 `a`에 `2`를 할당하는 것
 - 하나의 레지스터에서 담을 수 있는 데이터는 32비트 컴퓨터는 32비트 64비트 컴퓨터는 64비트(R0-N, PC, SP, LR)
   - PC(Program Counter): 프로그램을 순차적으로 수행하는 레지스터
   - SP(Stack Pointer): Stack안에서 가장 마지막에 들어간 위치를 가리킨다.
   - LR(Link Register): function을 수행하고 돌아갈 위치를 저장해놓은 레지스터
 - Read data and instructions from main memory(Control Unit)
   - 폰 노이만 아키텍쳐: Data와 Instruction을 다 같이 갖고 있는 구조(현재 대부분의 컴퓨터)
+    - CPU - Memory(Data + Instruction)
   - 하버드 아키텍쳐: Data와 Instrunction을 따로 갖는 구조
-
+    - Memory(Data) - CPU - Memory(Instruction)
 
 ### Main Memory(RAM, Random Access Memory) - Primary Storage
 
@@ -54,11 +66,16 @@ Central Processing Unit(CPU)
 - rewritable(Data의 overwrite)
 - random-accessible
 - Array of bits, bytes, kilobytes... and words
+  - word: cpu가 메모리에서 한 번에 읽어올 수 있는 단위
 - Each byte has its own address
 - 32비트 컴퓨터는 2^32비트 만큼을 쓸 수 있는데 이는 4GB이므로 메모리는 4GB만 쓸 수 있다.
 
 ### Processor와 Main Memory
 
+- Instruction Cycle
+  - Fetch an instruction from the memory address written in PC.
+  - Decode and execute th instrction then write back.
+  - Update the value written in PC.
 - Fetch => Decode => Execution
 - Fetch instruction from the address of memory written in PC.(Automatically)
 - Decode and execute the instruction
@@ -68,12 +85,13 @@ Central Processing Unit(CPU)
 
 - Non-volatile, huge compared to Main memory
 - slower than main memory
-- rapidly emerging, evolving => HDD / SSD/ PRAM
-  - PRAM : RAM + Storage
+- rapidly emerging, evolving => HDD / SSD / PRAM
+  - PRAM(Persistent RAM) : RAM + Storage
 
 ### Storage Device Hierarchy
 
-Small but Fast => Huge but Slow
+- Small but Fast => Huge but Slow
+- Register < Cahce < RAM < SSD < HDD < External Storage
 
 #### Primary
 
@@ -91,6 +109,12 @@ Small but Fast => Huge but Slow
 - External Storage
 
 ### Processor와 I/O
+
+- IO
+  - The way users get/put the data, from/to computer.
+  - Mostly, have their own controller.
+  - Device controllers operate independently.
+  - Driver: CPU와 I/O간의 통신하기 위한 규약이 정의된 것.
 
 #### Interrupts
 
